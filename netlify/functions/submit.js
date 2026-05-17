@@ -28,18 +28,20 @@ async function sendWebhookMessage(text, blocks) {
 }
 
 async function uploadFileToSlack(filePath, fileName, fileType, title, channelId) {
+  const fileBuffer = fs.readFileSync(filePath);
+  const fileSize = fileBuffer.length;
+
   const urlRes = await fetch('https://slack.com/api/files.getUploadURLExternal', {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${SLACK_BOT_TOKEN}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ filename: fileName, length: fs.statSync(filePath).size }),
+    body: JSON.stringify({ filename: fileName || 'file', length: fileSize }),
   });
   const urlData = await urlRes.json();
   if (!urlData.ok) throw new Error(`getUploadURL: ${urlData.error}`);
 
-  const fileBuffer = fs.readFileSync(filePath);
   await fetch(urlData.upload_url, {
     method: 'POST',
     headers: { 'Content-Type': fileType || 'application/octet-stream' },
