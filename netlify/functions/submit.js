@@ -125,7 +125,7 @@ exports.handler = async function(event) {
       const file = Array.isArray(fileArr) ? fileArr[0] : fileArr;
       console.log(`File [${key}]:`, JSON.stringify({ filepath: file?.filepath, name: file?.originalFilename, size: file?.size, mime: file?.mimetype }));
       if (!file?.filepath) continue;
-      const fileName = (file.originalFilename || key).replace(/[^a-zA-Z0-9._-]/g, '_') + '.jpg';
+      const fileName = (file.originalFilename || key).replace(/\s+/g, '_').replace(/[^a-zA-Z0-9._-]/g, '') || (key + '.png');
       const title = `[${refId}] ${FILE_LABELS[key]}`;
       try {
         await uploadFileToSlack(file.filepath, fileName, file.mimetype || 'image/jpeg', title, channelId);
