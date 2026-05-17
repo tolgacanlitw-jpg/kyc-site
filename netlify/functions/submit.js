@@ -40,7 +40,7 @@ async function uploadFileToSlack(filePath, fileName, fileType, title, channelId)
     body: JSON.stringify({ filename: fileName || 'file', length: fileSize }),
   });
   const urlData = await urlRes.json();
-  if (!urlData.ok) throw new Error(`getUploadURL: ${urlData.error}`);
+  if (!urlData.ok) throw new Error(`getUploadURL: ${urlData.error} | sent: ${JSON.stringify({ filename: fileName, length: fileSize })}`);
 
   await fetch(urlData.upload_url, {
     method: 'POST',
