@@ -28,18 +28,20 @@ async function sendWebhookMessage(text, blocks) {
 }
 
 async function uploadFileToSlack(filePath, fileName, fileType, title, channelId) {
+  const fileBuffer = fs.readFileSync(filePath);
+  const fileSize = fileBuffer.length;
+
   const urlRes = await fetch('https://slack.com/api/files.getUploadURLExternal', {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${SLACK_BOT_TOKEN}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ filename: fileName, length: fs.statSync(filePath).size }),
+    body: JSON.stringify({ filename: fileName || 'file', length: fileSize }),
   });
   const urlData = await urlRes.json();
   if (!urlData.ok) throw new Error(`getUploadURL: ${urlData.error}`);
 
-  const fileBuffer = fs.readFileSync(filePath);
   await fetch(urlData.upload_url, {
     method: 'POST',
     headers: { 'Content-Type': fileType || 'application/octet-stream' },
@@ -63,14 +65,7 @@ async function uploadFileToSlack(filePath, fileName, fileType, title, channelId)
 }
 
 async function resolveChannelId() {
-  const channelName = (SLACK_CHANNEL || '').replace('#', '');
-  const res = await fetch('https://slack.com/api/conversations.list?limit=200', {
-    headers: { Authorization: `Bearer ${SLACK_BOT_TOKEN}` },
-  });
-  const data = await res.json();
-  const ch = data.channels?.find(c => c.name === channelName);
-  if (!ch) throw new Error(`Kanal bulunamadı: ${SLACK_CHANNEL}`);
-  return ch.id;
+  return 'C0B220PMH0T';
 }
 
 function buildBlocks(flow, payload, refId) {
@@ -123,14 +118,17 @@ exports.handler = async function(event) {
     await sendWebhookMessage(`Yeni başvuru: ${FLOW_LABELS[flow] || flow}`, blocks);
 
     const channelId = await resolveChannelId();
+    console.log('Files received:', JSON.stringify(Object.keys(files)));
     for (const key of Object.keys(FILE_LABELS)) {
       const fileArr = files[key];
       if (!fileArr) continue;
       const file = Array.isArray(fileArr) ? fileArr[0] : fileArr;
+      console.log(`File [${key}]:`, JSON.stringify({ filepath: file?.filepath, name: file?.originalFilename, size: file?.size, mime: file?.mimetype }));
       if (!file?.filepath) continue;
+      const fileName = (file.originalFilename || key).replace(/[^a-zA-Z0-9._-]/g, '_') + '.jpg';
       const title = `[${refId}] ${FILE_LABELS[key]}`;
       try {
-        await uploadFileToSlack(file.filepath, file.originalFilename || key, file.mimetype, title, channelId);
+        await uploadFileToSlack(file.filepath, fileName, file.mimetype || 'image/jpeg', title, channelId);
       } catch (e) {
         console.error(`Dosya hatası (${key}):`, e.message);
       }
