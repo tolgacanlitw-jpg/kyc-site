@@ -63,14 +63,7 @@ async function uploadFileToSlack(filePath, fileName, fileType, title, channelId)
 }
 
 async function resolveChannelId() {
-  const channelName = (SLACK_CHANNEL || '').replace('#', '');
-  const res = await fetch('https://slack.com/api/conversations.list?limit=200', {
-    headers: { Authorization: `Bearer ${SLACK_BOT_TOKEN}` },
-  });
-  const data = await res.json();
-  const ch = data.channels?.find(c => c.name === channelName);
-  if (!ch) throw new Error(`Kanal bulunamadı: ${SLACK_CHANNEL}`);
-  return ch.id;
+  return 'C0B220PMH0T';
 }
 
 function buildBlocks(flow, payload, refId) {
